@@ -11,14 +11,14 @@ try:
         model = pickle.load(file)
 except FileNotFoundError:
     st.error("The model file 'finalized_model.pickle' was not found. Please ensure it is uploaded correctly.")
-    st.stop()  # Stop execution if the model file is missing
+    st.stop()
 
 try:
     with open('Scaler.pickle', 'rb') as file_r:
         scaler = pickle.load(file_r)
 except FileNotFoundError:
     st.error("The scaler file 'Scaler.pickle' was not found. Please ensure it is uploaded correctly.")
-    st.stop()  # Stop execution if the scaler file is missing
+    st.stop()
 
 # User input for years of experience
 x = st.number_input("Enter Years of Experience:", min_value=0.0, format="%.1f", help="Enter the number of years you have worked.")
