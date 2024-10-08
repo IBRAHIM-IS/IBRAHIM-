@@ -21,7 +21,8 @@ except FileNotFoundError:
     st.stop()
 
 # User input for years of experience
-x = st.number_input("Enter Years of Experience:", min_value=0.0, format="%.1f", help="Enter the number of years you have worked.")
+x = st.number_input("Enter Years of Experience:", min_value=0.0, format="%.1f",
+                    help="Enter the number of years you have worked.")
 
 # Predict the salary when the user clicks the 'Predict' button
 if st.button("Predict"):
@@ -30,6 +31,9 @@ if st.button("Predict"):
         scaled_data = scaler.transform(np.array([[x]]))
         # Predict the salary using the trained model
         y = model.predict(scaled_data)
-        st.success(f"Predicted Salary: ${y[0]:,.2f}")
+
+        # Format salary with a period for thousands and a comma for decimals
+        formatted_salary = f"{y[0]:,.2f}".replace(",", "X").replace(".", ",").replace("X", ".")
+        st.success(f"Predicted Salary: ${formatted_salary}")
     except Exception as e:
         st.error(f"An error occurred during prediction: {e}")
